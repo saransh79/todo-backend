@@ -2,6 +2,10 @@ import mongoose from "mongoose";
 
 
 const TodoSchema = new mongoose.Schema({
+    email:{
+        type: String,
+        required: true
+    },
     data: {
         type: String,
         required: true

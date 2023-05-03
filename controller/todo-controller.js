@@ -2,8 +2,10 @@ import Todo from '../model/Todo.js';
 
 export const addTodo = async (request, response) => {
     try {
+        const {email, data}= request.body;
         const newTodo = await Todo.create({
-            data: request.body.data,
+            data,
+            email,
             createdAt: Date.now()
         })
 
@@ -17,7 +19,9 @@ export const addTodo = async (request, response) => {
 
 export const getAllTodos = async (request, response) => {
     try {
-        const todos = await Todo.find({}).sort({ 'createdAt': 1 })
+        const {email}= request.body;
+        console.log(email);
+        const todos = await Todo.find({email}).sort({ 'createdAt': -1 })
 
         return response.status(200).json(todos);
     } catch (error) {
